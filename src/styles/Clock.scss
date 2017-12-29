@@ -1,0 +1,75 @@
+// This implementation inpired by https://cssanimation.rocks/clocks.
+
+@import "variables";
+
+.clock {
+  position: relative;
+  border-radius: 50%;
+  background: url(../assets/clockface.svg) no-repeat center;
+  height: 240px;
+
+  &:after {
+    background: black;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+  }
+
+  .hand-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .seconds-container {
+    // We can reliably tick the second hand with css, the other hands need some state information.
+    animation: rotate 60s infinite steps(60);
+  }
+
+  .hour-hand {
+    background: $secondary-colour;
+    position: absolute;
+    border-radius: 85%/10%;
+    width: 5px;
+    height: 20%;
+    left: 49%;
+    top: 30%;
+    transform-origin: 50% 100%;
+  }
+
+  .minute-hand {
+    background: $primary-colour;
+    position: absolute;
+    border-radius: 150%/10%;
+    width: 5px;
+    height: 35%;
+    left: 49%;
+    top: 15%;
+    transform-origin: 50% 100%;
+  }
+
+  .second-hand {
+    background: $red;
+    position: absolute;
+    border-radius: 200%/10%;
+    width: 2px;
+    height: 30%;
+    left: 49.5%;
+    top: 20%;
+    transform-origin: 50% 100%;
+  }
+}
+
+// Used to animate a clock hand doing a full rotation
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
